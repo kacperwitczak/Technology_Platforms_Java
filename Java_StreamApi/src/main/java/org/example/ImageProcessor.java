@@ -32,9 +32,9 @@ public class ImageProcessor {
     }
 
     //custom thread pool
-    //https://www.baeldung.com/java-8-parallel-streams-custom-threadpool
+
     public void process(int threadsNumber) {
-        ExecutorService pool = Executors.newFixedThreadPool(threadsNumber);
+        ForkJoinPool pool = new ForkJoinPool(threadsNumber);
 
         pool.submit( () ->{
                 paths.parallelStream()
@@ -81,7 +81,8 @@ public class ImageProcessor {
     }
 
     public void saveImage(Pair<Path, BufferedImage> pair) {
-        Path destinationPath = destination.resolve(pair.getLeft());
+        Path destinationPath = destination.resolve(pair.getLeft().getFileName());
+        //System.out.println("Processed: " + destinationPath.toString());
         try {
             ImageIO.write(pair.getRight(), "png", destinationPath.toFile());
         } catch (IOException e) {

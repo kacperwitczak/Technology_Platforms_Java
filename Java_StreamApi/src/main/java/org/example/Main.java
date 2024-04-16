@@ -8,12 +8,12 @@ public class Main {
         String destination = args[1];
         ImageProcessor imageProcessor = new ImageProcessor(source, destination);
 
-        int n = 2000;
+        int n = 5;
         long time = System.currentTimeMillis();
         imageProcessor.process(n);
         System.out.println("Time for " + n + " threads: " + (System.currentTimeMillis() - time));
 
-        n = 15;
+        n = 10;
         time = System.currentTimeMillis();
         imageProcessor.process(n);
         System.out.println("Time for " + n + " threads: " + (System.currentTimeMillis() - time));
